@@ -10,10 +10,10 @@
           <i class="fa" ng-class="{'fa-expand' : !fullscreen, 'fa-compress': fullscreen}"></i>
         </button>
         <div class="btn-group pull-right">
-          <label class="btn btn-default" ng-model="studentFilter" btn-radio="'allStudents'">
+          <label class="btn btn-default" ng-model="studentFilter" uib-btn-radio="'allStudents'">
             <i class="fa fa-university" tooltip-placement="{{ fullscreen ? 'bottom' : 'top' }}" tooltip="Show all students"></i>
           </label>
-          <label class="btn btn-default" ng-model="studentFilter" btn-radio="'myStudents'">
+          <label class="btn btn-default" ng-model="studentFilter" uib-btn-radio="'myStudents'">
             <i class="fa fa-pencil" tooltip-placement="{{ fullscreen ? 'bottom' : 'top' }}" tooltip="Show only my students"></i>
           </label>
         </div>

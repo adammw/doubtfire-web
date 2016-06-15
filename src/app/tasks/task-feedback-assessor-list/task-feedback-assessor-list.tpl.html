@@ -9,21 +9,21 @@
       <div class="pull-right text-right toolbar">
         <div class="buttons">
           <div class="btn-group">
-            <label class="btn btn-default" ng-model="studentFilter" btn-radio="'allStudents'">
+            <label class="btn btn-default" ng-model="studentFilter" uib-btn-radio="'allStudents'">
               <i class="fa fa-university" tooltip-placement="{{ fullscreen ? 'bottom' : 'top' }}" tooltip-append-to-body="true" tooltip="Show tasks for all students"></i>
             </label>
-            <label class="btn btn-default" ng-model="studentFilter" btn-radio="'myStudents'">
+            <label class="btn btn-default" ng-model="studentFilter" uib-btn-radio="'myStudents'">
               <i class="fa fa-pencil" tooltip-placement="{{ fullscreen ? 'bottom' : 'top' }}" tooltip-append-to-body="true" tooltip="Only show tasks for my students"></i>
             </label>
           </div>
           <div class="btn-group" ng-show="context == 'assess'">
-            <label class="btn btn-default" ng-model="statusFilter" btn-radio="'ready_to_mark'">
+            <label class="btn btn-default" ng-model="statusFilter" uib-btn-radio="'ready_to_mark'">
               <i class="fa fa-thumbs-up" tooltip-placement="{{ fullscreen ? 'bottom' : 'top' }}" tooltip-append-to-body="true" tooltip="Show tasks that are ready to mark."></i>
             </label>
-            <label class="btn btn-default" ng-model="statusFilter" btn-radio="'need_help'">
+            <label class="btn btn-default" ng-model="statusFilter" uib-btn-radio="'need_help'">
               <i class="fa fa-question" tooltip-placement="{{ fullscreen ? 'bottom' : 'top' }}" tooltip-append-to-body="true" tooltip="Show tasks that need help."></i>
             </label>
-            <label class="btn btn-default" ng-model="statusFilter" btn-radio="'discuss'">
+            <label class="btn btn-default" ng-model="statusFilter" uib-btn-radio="'discuss'">
               <i class="fa fa-commenting" tooltip-placement="{{ fullscreen ? 'bottom' : 'top' }}" tooltip-append-to-body="true" tooltip="Show tasks to discuss with students."></i>
             </label>
           </div>

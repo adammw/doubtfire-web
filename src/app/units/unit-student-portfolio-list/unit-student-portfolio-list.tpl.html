@@ -18,16 +18,16 @@
         <div class="pull-right toolbar">
           <div class="buttons">
             <div class="btn-group">
-              <label class="btn btn-default" ng-model="studentFilter" btn-radio="'allStudents'">
+              <label class="btn btn-default" ng-model="studentFilter" uib-btn-radio="'allStudents'">
                 <i class="fa fa-university" tooltip-placement="{{ fullscreen ? 'bottom' : 'top' }}" tooltip="Show all students"></i>
               </label>
-              <label class="btn btn-default" ng-model="studentFilter" btn-radio="'myStudents'">
+              <label class="btn btn-default" ng-model="studentFilter" uib-btn-radio="'myStudents'">
                 <i class="fa fa-pencil" tooltip-placement="{{ fullscreen ? 'bottom' : 'top' }}" tooltip="Show only my students"></i>
                 <span class="tooltip">Show only my students</span>
               </label>
             </div>
             <div class="btn-group btn-group-sm select-portfolio-grade">
-              <label ng-repeat="grade in grades" ng-click="chooseGrade($index)" class="btn btn-default col-sm-3 text-center" ng-model="filterOptions.selectedGrade" btn-radio="{{$index}}">
+              <label ng-repeat="grade in grades" ng-click="chooseGrade($index)" class="btn btn-default col-sm-3 text-center" ng-model="filterOptions.selectedGrade" uib-btn-radio="{{$index}}">
                 <grade-icon grade="grade" tooltip="Select to show student's aiming for {{grade}}" tooltip-append-to-body="true" class="text-{{$index == filterOptions.selectedGrade ? 'primary' : 'muted'}}"></grade-icon>
               </label>
             </div>

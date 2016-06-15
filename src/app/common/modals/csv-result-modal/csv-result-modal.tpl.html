@@ -8,13 +8,13 @@
   </div>
   <div class="modal-body clearfix">
     <p class="btn-group col-sm-8 col-sm-offset-2">
-        <button class="btn btn-default col-sm-4" ng-class="{ 'btn-success': activeCsvResponseSelection == 'success' }" ng-model="activeCsvResponseSelection" btn-radio="'success'">
+        <button class="btn btn-default col-sm-4" ng-class="{ 'btn-success': activeCsvResponseSelection == 'success' }" ng-model="activeCsvResponseSelection" uib-btn-radio="'success'">
           Success <span class="badge pull-right">{{response.success.length}}</span>
         </button>
-        <button class="btn btn-default col-sm-4" ng-class="{ 'btn-danger': activeCsvResponseSelection == 'errors' }" ng-model="activeCsvResponseSelection" btn-radio="'errors'">
+        <button class="btn btn-default col-sm-4" ng-class="{ 'btn-danger': activeCsvResponseSelection == 'errors' }" ng-model="activeCsvResponseSelection" uib-btn-radio="'errors'">
           Errors <span class="badge pull-right">{{response.errors.length}}</span>
         </button>
-        <button class="btn btn-default col-sm-4" ng-class="{ 'btn-warning': activeCsvResponseSelection == 'ignored' }" ng-model="activeCsvResponseSelection" btn-radio="'ignored'">
+        <button class="btn btn-default col-sm-4" ng-class="{ 'btn-warning': activeCsvResponseSelection == 'ignored' }" ng-model="activeCsvResponseSelection" uib-btn-radio="'ignored'">
           Ignored <span class="badge pull-right">{{response.ignored.length}}</span>
         </button>
     </p>

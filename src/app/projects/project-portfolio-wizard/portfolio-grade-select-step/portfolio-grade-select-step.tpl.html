@@ -12,7 +12,7 @@
     <hr>
     <p>Select the <strong>grade</strong> you are applying for {{unit.name}} below</p>
     <div class="btn-group">
-      <label ng-repeat="grade in grades" ng-click="chooseGrade($index); status.isopen=false" class="btn btn-default col-sm-3" ng-model="project.target_grade" btn-radio="{{$index}}">
+      <label ng-repeat="grade in grades" ng-click="chooseGrade($index); status.isopen=false" class="btn btn-default col-sm-3" ng-model="project.target_grade" uib-btn-radio="{{$index}}">
         <grade-icon grade="grade" class="text-{{project.target_grade == grades.indexOf(grade) ? 'success' : 'muted'}}"></grade-icon>
       </label>
     </div>

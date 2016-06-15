@@ -16,10 +16,10 @@
             <div class="pull-right toolbar">
               <div class="buttons">
                 <div class="btn-group">
-                  <label class="btn btn-default" ng-model="taskDetailsSelector.viewAll" btn-radio="false">
+                  <label class="btn btn-default" ng-model="taskDetailsSelector.viewAll" uib-btn-radio="false">
                     <i tooltip="View the tasks to focus on now" class="fa fa-dashboard"></i>
                   </label>
-                  <label class="btn btn-default" ng-model="taskDetailsSelector.viewAll" btn-radio="true">
+                  <label class="btn btn-default" ng-model="taskDetailsSelector.viewAll" uib-btn-radio="true">
                     <i tooltip="View all tasks" class="fa fa-list"></i>
                   </label>
                 </div>
@@ -40,7 +40,7 @@
           </div>
           <div class="panel-body text-center">
             <p class="btn-group">
-              <label ng-repeat="grade in grades" ng-click="chooseGrade($index)" class="btn btn-default col-sm-3 text-center" ng-model="project.target_grade" btn-radio="{{$index}}">
+              <label ng-repeat="grade in grades" ng-click="chooseGrade($index)" class="btn btn-default col-sm-3 text-center" ng-model="project.target_grade" uib-btn-radio="{{$index}}">
                 <grade-icon grade="grade" tooltip="Select a {{grade}} as your target grade" tooltip-append-to-body="true" class="text-{{$index == project.target_grade ? 'primary' : 'muted'}}"></grade-icon>
               </label>
             </p>
@@ -70,10 +70,10 @@
         <div class="pull-right text-right toolbar">
           <div class="buttons">
             <div class="btn-group">
-              <label class="btn btn-default text-center" btn-radio="'burndown'" ng-model="currentVisualisation">
+              <label class="btn btn-default text-center" uib-btn-radio="'burndown'" ng-model="currentVisualisation">
                 <i class="fa fa-line-chart"></i>
               </label>
-              <label class="btn btn-default text-center" btn-radio="'taskSummary'" ng-model="currentVisualisation">
+              <label class="btn btn-default text-center" uib-btn-radio="'taskSummary'" ng-model="currentVisualisation">
                 <i class="fa fa-pie-chart"></i>
               </label>
             </div>

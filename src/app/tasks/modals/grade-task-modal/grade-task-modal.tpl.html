@@ -5,7 +5,7 @@
   <div class="modal-body text-center">
     <p>Please provide a grade to change the student's status for task <label class="label label-info">{{task.abbreviation}}</label>.</p>
     <p class="btn-group">
-      <label ng-repeat="grade in grades" class="btn btn-default col-sm-3 text-center" ng-model="data.desiredGrade" btn-radio="{{$index}}">
+      <label ng-repeat="grade in grades" class="btn btn-default col-sm-3 text-center" ng-model="data.desiredGrade" uib-btn-radio="{{$index}}">
         <grade-icon grade="grade" tooltip="This student completed the task to a {{grade}} standard" tooltip-append-to-body="true"></grade-icon>
       </label>
     </p>
