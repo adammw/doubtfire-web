@@ -3,14 +3,14 @@ angular.module('doubtfire.tasks.modals.grade-task-modal', [])
 #
 # A modal to grade a graded task
 #
-.factory('GradeTaskModal', ($modal) ->
+.factory('GradeTaskModal', ($uibModal) ->
   GradeTaskModal = {}
 
   #
   # Open a grade task modal with the provided task
   #
   GradeTaskModal.show = (task) ->
-    $modal.open
+    $uibModal.open
       templateUrl: 'tasks/modals/grade-task-modal/grade-task-modal.tpl.html'
       controller: 'GradeTaskModal'
       resolve:
@@ -18,11 +18,11 @@ angular.module('doubtfire.tasks.modals.grade-task-modal', [])
 
   GradeTaskModal
 )
-.controller('GradeTaskModal', ($scope, $modalInstance, gradeService, task) ->
+.controller('GradeTaskModal', ($scope, $uibModalInstance, gradeService, task) ->
   $scope.task = task
   $scope.data = { desiredGrade: null }
   $scope.grades = gradeService.grades
-  $scope.dismiss = $modalInstance.dismiss
+  $scope.dismiss = $uibModalInstance.dismiss
   $scope.close = ->
-    $modalInstance.close $scope.data.desiredGrade
+    $uibModalInstance.close $scope.data.desiredGrade
 )

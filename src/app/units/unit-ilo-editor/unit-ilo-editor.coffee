@@ -7,7 +7,7 @@ angular.module('doubtfire.units.unit-ilo-editor',[])
   replace: true
   restrict: 'E'
   templateUrl: 'units/unit-ilo-editor/unit-ilo-editor.tpl.html'
-  controller: ($scope, $modal, $rootScope, IntendedLearningOutcome, alertService, CsvResultModal, UnitILOEditModal) ->
+  controller: ($scope, $uibModal, $rootScope, IntendedLearningOutcome, alertService, CsvResultModal, UnitILOEditModal) ->
     $scope.batchFiles = { file: { name: 'CSV Data', type: 'csv'  } }
     $scope.batchOutcomeUrl = ->
       IntendedLearningOutcome.getOutcomeBatchUploadUrl($scope.unit)

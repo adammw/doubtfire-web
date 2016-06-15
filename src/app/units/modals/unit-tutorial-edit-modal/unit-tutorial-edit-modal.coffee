@@ -2,7 +2,7 @@ angular.module('doubtfire.units.modals.unit-tutorial-edit-modal', [])
 #
 # Modal to edit or create a new tutorial
 #
-.factory('UnitTutorialEditModal', ($modal) ->
+.factory('UnitTutorialEditModal', ($uibModal) ->
   UnitTutorialEditModal = {}
 
   #
@@ -10,7 +10,7 @@ angular.module('doubtfire.units.modals.unit-tutorial-edit-modal', [])
   # it will assume you want to make a new tutorial
   #
   UnitTutorialEditModal.show = (unit, tutorial) ->
-    $modal.open
+    $uibModal.open
       controller: 'UnitTutorialEditModalCtrl'
       templateUrl: 'units/modals/unit-tutorial-edit-modal/unit-tutorial-edit-modal.tpl.html'
       resolve: {
@@ -20,7 +20,7 @@ angular.module('doubtfire.units.modals.unit-tutorial-edit-modal', [])
 
   UnitTutorialEditModal
 )
-.controller('UnitTutorialEditModalCtrl', ($scope, $modalInstance, tutorial, unit, Tutorial, alertService) ->
+.controller('UnitTutorialEditModalCtrl', ($scope, $uibModalInstance, tutorial, unit, Tutorial, alertService) ->
   d = new Date()
   d.setHours(8)
   d.setMinutes(30)
@@ -53,7 +53,7 @@ angular.module('doubtfire.units.modals.unit-tutorial-edit-modal', [])
       save_data.unit_id = unit.id
       Tutorial.create({ tutorial: save_data }).$promise.then (
         (response) ->
-          $modalInstance.close(response)
+          $uibModalInstance.close(response)
           $scope.unit.tutorials.push(response)
           alertService.add("success", "Tutorial Added", 2000)
       ),
@@ -65,7 +65,7 @@ angular.module('doubtfire.units.modals.unit-tutorial-edit-modal', [])
     else
       Tutorial.update( { id: tutorial.id, tutorial: save_data } ).$promise.then (
         (response) ->
-          $modalInstance.close(response)
+          $uibModalInstance.close(response)
           $scope.tutorial.tutor = response.tutor
           $scope.tutorial.tutor_name = response.tutor_name
           alertService.add("success", "Tutorial Updated", 2000)

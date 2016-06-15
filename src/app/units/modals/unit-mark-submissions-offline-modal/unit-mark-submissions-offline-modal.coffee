@@ -2,12 +2,12 @@ angular.module('doubtfire.units.modals.unit-mark-submissions-offline-modal', [])
 #
 # Modal to show marking context for offline batch download
 #
-.factory('UnitMarkSubmissionsOfflineModal', ($modal) ->
+.factory('UnitMarkSubmissionsOfflineModal', ($uibModal) ->
   UnitMarkSubmissionsOfflineModal = {}
 
   # Must provide unit
   UnitMarkSubmissionsOfflineModal.show = (unit) ->
-    $modal.open
+    $uibModal.open
       controller: 'UnitMarkSubmissionsOfflineModalCtrl'
       templateUrl: 'units/modals/unit-mark-submissions-offline-modal/unit-mark-submissions-offline-modal.tpl.html'
       resolve: {
@@ -16,7 +16,7 @@ angular.module('doubtfire.units.modals.unit-mark-submissions-offline-modal', [])
 
   UnitMarkSubmissionsOfflineModal
 )
-.controller('UnitMarkSubmissionsOfflineModalCtrl', ($scope, $modalInstance, alertService, unit, Task, CsvResultModal) ->
+.controller('UnitMarkSubmissionsOfflineModalCtrl', ($scope, $uibModalInstance, alertService, unit, Task, CsvResultModal) ->
   $scope.unit = unit
   $scope.zipMarkingFiles = { file: { name: 'Zip of annotated task PDFs and marks.csv', type: 'zip' } }
   $scope.csvMarkingFiles = { file: { name: 'Modified marks.csv', type: 'csv' } }
@@ -29,5 +29,5 @@ angular.module('doubtfire.units.modals.unit-mark-submissions-offline-modal', [])
   $scope.onMarkingUploadSuccess = (response) ->
     CsvResultModal.show "Marking CSV and ZIP upload", response
     $scope.unit.refreshStudents()
-  $scope.closeModal = $modalInstance.dismiss
+  $scope.closeModal = $uibModalInstance.dismiss
 )

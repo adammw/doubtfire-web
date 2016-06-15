@@ -7,7 +7,7 @@ angular.module('doubtfire.units.unit-tutorials-editor', [])
   replace: true
   restrict: 'E'
   templateUrl: 'units/unit-tutorials-editor/unit-tutorials-editor.tpl.html'
-  controller: ($scope, $modal, $rootScope, Unit, UnitRole, Tutorial, UnitTutorialEditModal, alertService) ->
+  controller: ($scope, $rootScope, Unit, UnitRole, Tutorial, UnitTutorialEditModal, alertService) ->
     $scope.editTutorial = (tutorial) ->
       UnitTutorialEditModal.show $scope.unit, tutorial
 

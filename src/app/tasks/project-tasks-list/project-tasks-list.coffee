@@ -15,7 +15,7 @@ angular.module('doubtfire.tasks.project-tasks-list', [])
     onSelect: "="
     inMenu: '@'
 
-  controller: ($scope, $modal, taskService, groupService, analyticsService) ->
+  controller: ($scope, taskService, groupService, analyticsService) ->
     analyticsService.event 'Student Project View', "Showed Task Button List"
 
     # functions from task service

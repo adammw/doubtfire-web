@@ -1,13 +1,13 @@
 angular.module("doubtfire.common.modals.confirmation-modal", [])
 
-.factory("ConfirmationModal", ($modal) ->
+.factory("ConfirmationModal", ($uibModal) ->
   ConfirmationModal = {}
 
   #
   # Show a modal asking the user to confirm their indicated action.
   #
   ConfirmationModal.show = (title, message, action) ->
-    modalInstance = $modal.open
+    modalInstance = $uibModal.open
       templateUrl: 'common/modals/confirmation-modal/confirmation-modal.tpl.html'
       controller: 'ConfirmationModalCtrl'
       resolve:
@@ -21,15 +21,15 @@ angular.module("doubtfire.common.modals.confirmation-modal", [])
 #
 # Controller for confirmation modal
 #
-.controller('ConfirmationModalCtrl', ($scope, $modalInstance, title, message, action, alertService) ->
+.controller('ConfirmationModalCtrl', ($scope, $uibModalInstance, title, message, action, alertService) ->
   $scope.title = title
   $scope.message = message
 
   $scope.confirmAction = () ->
     action()
-    $modalInstance.dismiss()
+    $uibModalInstance.dismiss()
 
   $scope.cancelAction = () ->
     alertService.add 'info', "#{title} action cancelled", 3000
-    $modalInstance.dismiss()
+    $uibModalInstance.dismiss()
 )

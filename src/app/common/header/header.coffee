@@ -3,7 +3,7 @@
 #
 angular.module('doubtfire.common.header', [])
 
-.controller("BasicHeaderCtrl", ($scope, $state, $modal, User, AboutDoubtfireModal, UserNotificationSettingsModal, UserSettingsModal, currentUser, headerService, unitService, projectService, dateService) ->
+.controller("BasicHeaderCtrl", ($scope, $state, User, AboutDoubtfireModal, UserNotificationSettingsModal, UserSettingsModal, currentUser, headerService, unitService, projectService, dateService) ->
   $scope.menus = headerService.getMenus()
   $scope.currentUser = currentUser.profile
   $scope.showDate = dateService.showDate
@@ -29,7 +29,7 @@ angular.module('doubtfire.common.header', [])
     AboutDoubtfireModal.show()
 )
 
-.controller("ErrorHeaderCtrl", ($scope, $state, $modal, currentUser, headerService) ->
+.controller("ErrorHeaderCtrl", ($scope, $state, currentUser, headerService) ->
   $scope.menus = headerService.getMenus()
   $scope.currentUser = currentUser.profile
 )
