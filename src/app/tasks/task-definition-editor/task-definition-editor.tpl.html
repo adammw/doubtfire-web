@@ -77,7 +77,7 @@
                 <div class="form-group" ng-required="isNew">
                   <label class="col-sm-3 control-label">Restricted</label>
                   <div class="col-sm-7">
-                    <button type="button" class="btn btn-default" ng-model="task.restrict_status_updates" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+                    <button type="button" class="btn btn-default" ng-model="task.restrict_status_updates" uib-btn-checkbox uib-btn-checkbox-true="1" uib-btn-checkbox-false="0">
                       <i class="fa fa-{{task.restrict_status_updates ? 'check' : 'times'}}"></i>
                     </button>
                     <span class="help-block">
@@ -89,7 +89,7 @@
                 <div class="form-group" ng-required="isNew">
                   <label class="col-sm-3 control-label">Graded</label>
                   <div class="col-sm-7">
-                    <button type="button" class="btn btn-default" ng-model="task.is_graded" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+                    <button type="button" class="btn btn-default" ng-model="task.is_graded" uib-btn-checkbox uib-btn-checkbox-true="1" uib-btn-checkbox-false="0">
                       <i class="fa fa-{{task.is_graded ? 'check' : 'times'}}"></i>
                     </button>
                     <span class="help-block">
