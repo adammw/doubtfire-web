@@ -3,7 +3,7 @@
     <div class="task-viewer-toolbar clearfix">
       <div class="btn-group dropdown active-task-selector col-sm-1" uib-dropdown>
         <button class="btn task-status {{activeStatusData().class}} dropdown-toggle" uib-dropdown-toggle>
-          <label>{{project.selectedTask.definition.abbreviation}}</label>
+          <label>{{task.definition.abbreviation}}</label>
           <span class="caret"></span>
         </button><!--/dropdown-button-->
         <project-tasks-list
@@ -17,39 +17,38 @@
 
       <div class="task-header-info col-sm-10">
         <div class="col-sm-8 task-status-summary">
-          <!-- Lachlan -->
           <div class="task-header-grade-icon">
-            <grade-icon grade="project.selectedTask.definition.target_grade"></grade-icon>
+            <grade-icon grade="task.definition.target_grade"></grade-icon>
           </div>
-          <h3>{{project.selectedTask.definition.name}}</h3>
+          <h3>{{task.definition.name}}</h3>
           <p class="help-block">{{activeStatusData().helpText}}</p>
           <div class="graded-task-mark text-danger" ng-if="taskIsGraded">
-            Your tutor has marked you on this task to a <grade-icon grade="project.selectedTask.grade"></grade-icon> standard.
+            Your tutor has marked you on this task to a <grade-icon grade="task.grade"></grade-icon> standard.
           </div>
         </div>
         <div class="col-sm-4 date-info">
-          <div class="overdue label label-{{daysOverdue(project.selectedTask) > 5 ? 'danger' : 'warning'}}" ng-hide="daysOverdue(project.selectedTask) === false" tooltip="Tasks are overdue until they are discussed with your tutor." tooltip-placement="right">
+          <div class="overdue label label-{{daysOverdue(task) > 5 ? 'danger' : 'warning'}}" ng-hide="daysOverdue(task) === false" tooltip="Tasks are overdue until they are discussed with your tutor." tooltip-placement="right">
             <i class="fa fa-exclamation-triangle"></i>
-            Past Target By <br/> {{daysOverdue(project.selectedTask)}} day{{daysOverdue(project.selectedTask) > 1 ? 's' : ''}}
+            Past Target By <br/> {{daysOverdue(task)}} day{{daysOverdue(task) > 1 ? 's' : ''}}
           </div>
           <p class="due-date" tooltip="You should aim to complete the task by this date" tooltip-placement="right">
-            <label>Target:</label> {{project.selectedTask.definition.target_date | date:'EEE MMM d'}}
+            <label>Target:</label> {{task.definition.target_date | date:'EEE MMM d'}}
           </p>
-          <p class="due-date" ng-show="project.selectedTask.definition.due_date" tooltip="The task must be completed by this date" tooltip-placement="right">
-            <label>Deadline:</label> {{project.selectedTask.definition.due_date | date:'EEE MMM d'}}
+          <p class="due-date" ng-show="task.definition.due_date" tooltip="The task must be completed by this date" tooltip-placement="right">
+            <label>Deadline:</label> {{task.definition.due_date | date:'EEE MMM d'}}
           </p>
         </div>
       </div><!--/task-header-info-->
 
       <div tooltip-placement="left" tooltip="{{activeStatusData().label}}" tooltip-append-to-body="true" class="btn-group dropdown active-task-status-selector col-sm-1 pull-right" uib-dropdown>
-        <button type="button" class="btn task-status {{statusClass(project.selectedTask.status)}} dropdown-toggle" uib-dropdown-toggle>
+        <button type="button" class="btn task-status {{statusClass(task.status)}} dropdown-toggle" uib-dropdown-toggle>
           <i class="{{activeStatusData().icon}} fa-2x"></i>
           <span class="caret"></span>
         </button>
 
         <task-status-selector
           uib-dropdown-menu
-          task="project.selectedTask"
+          task="task"
           assessing-unit-role="assessingUnitRole"
           in-menu="true"
           trigger-transition="triggerTransition"></task-status-selector>
@@ -58,30 +57,17 @@
     </div><!--/task-toolbar-->
   </div>
   <div class="col-sm-2 col-lg-1 task-viewer-tabs">
-      <tabset vertical="false" type="pills">
-        <tab ng-repeat="(tabKey, tab) in tabs | orderObjectBy: 'seq'" active="tab.active" ng-click="setActiveTab(tab)">
-          <tab-heading class="text-center" tooltip="{{tab.title}}" tooltip-placement="right" tooltip-popup-delay="200">
-              <i class="fa fa-2x {{tab.icon}}"></i>
-              <i class="fa fa-2x fa-warning" ng-class="{ 'text-warning': !isActiveTab(tab) }" ng-show="tab == tabs.plagiarismReport && project.selectedTask.similar_to_count > 0"></i>
-              <strong class="comment-count" ng-show="tab == tabs.viewComments && project.selectedTask.comments.length > 0">{{project.selectedTask.comments.length}}</strong>
-          </tab-heading>
-        </tab>
-      </tabset>
+    <tabs data="tabs" template-url="tasks/task-viewer/tabs.tpl.html"></tabs>
   </div>
   <div class="col-sm-10 col-lg-11" class="class-viewer-tab-contents">
     <div class="panel panel-primary">
       <div class="panel-heading row-fluid">
         <h3 class="panel-title">
-          {{activeTab.title}}
+          {{currentState.title}}
         </h3>
-        {{activeTab.subtitle}}
+        {{currentState.subtitle}}
       </div>
-      <div class="task-viewer-tab-panel">
-        <task-sheet-viewer task="project.selectedTask" project="project" unit="unit" ng-if="activeTab == tabs.taskSheet"></task-sheet-viewer>
-        <task-submission-wizard task="project.selectedTask" project="project" unit="unit" assessing-unit-role="assessingUnitRole" ng-if="activeTab == tabs.fileUpload"></task-submission-wizard>
-        <task-submission-viewer ng-show="activeTab == tabs.viewSubmission" project="project" task="project.selectedTask"></task-submission-viewer>
-        <task-comments-viewer ng-show="activeTab == tabs.viewComments" project="project" task="project.selectedTask"></task-comments-viewer>
-        <task-plagiarism-report-viewer task="project.selectedTask" ng-if="activeTab == tabs.plagiarismReport"></task-plagiarism-report-viewer>
+      <div class="task-viewer-tab-panel" ui-view="task">
       </div><!--/panel-body-area-->
     </div><!--/tab-contents-panel-->
   </div>

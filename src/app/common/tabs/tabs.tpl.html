@@ -1,0 +1,7 @@
+<uib-tabset class="tabset-icon" active="tabs.active" justified="true">
+  <uib-tab class="tab" ng-repeat="tab in tabs" ng-click="go(tab)">
+    <uib-tab-heading>
+      <i class="fa fa-2x {{tab.icon}}"></i> {{tab.title}}
+    </uib-tab-heading>
+  </uib-tab>
+</uib-tabset>

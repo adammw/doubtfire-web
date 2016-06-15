@@ -1,0 +1,9 @@
+<uib-tabset vertical="false" type="pills" active="tabs.active">
+  <uib-tab ng-repeat="tab in tabs" ng-click="go(tab)">
+    <uib-tab-heading class="text-center" tooltip="{{tab.title}}" tooltip-placement="right" tooltip-popup-delay="200">
+        <i class="fa fa-2x {{tab.icon}}"></i>
+        <i class="fa fa-2x fa-warning" ng-class="{ 'text-warning': !isActiveTab(tab) }" ng-show="tab == tabs.plagiarismReport && task.similar_to_count > 0"></i>
+        <strong class="comment-count" ng-show="tab == tabs.viewComments && task.comments.length > 0">{{task.comments.length}}</strong>
+    </uib-tab-heading>
+  </uib-tab>
+</uib-tabset>

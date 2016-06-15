@@ -23,42 +23,49 @@ angular.module("doubtfire.projects.project-viewer", [])
 
     $scope.showTaskView = (task, trigger) ->
       analyticsService.event 'Student Project View', "Switched to Task", trigger
-      if not (task or $scope.project.selectedTask)
-        task = _.find _.sortBy($scope.project.tasks, 'seq'), (t) -> $scope.taskDefinition(t).target_grade <= $scope.project.target_grade
-      else if not task and $scope.project.selectedTask
-        task = $scope.project.selectedTask
 
-      $scope.setActiveTab $scope.tabs.tasksTab
-      $scope.project.selectedTask = task
+      # if not (task or $scope.project.selectedTask)
+      #   task = _.find _.sortBy($scope.project.tasks, 'seq'), (t) -> $scope.taskDefinition(t).target_grade <= $scope.project.target_grade
+      # else if not task and $scope.project.selectedTask
+      #   task = $scope.project.selectedTask
+      $state.go('projects#show.tasks#show', { taskDefId: task.task_definition_id })
 
     #
     # Switcher to task view
     #
-    $scope.tabs =
-      progressTab:
+    $scope.tabs = [
+      {
         title:            'Progress'
+        route:            'projects#show.progress'
         icon:             'fa-line-chart'
         seq:              0
-      tasksTab:
+      }, {
         title:            'Tasks'
+        route:            'projects#show.tasks#show'
         icon:             'fa-tasks'
         seq:              1
-      tutorialTab:
+      }, {
         title:            'Tutorials'
+        route:            'projects#show.tutorials'
         icon:             'fa-pencil'
         seq:              2
-      groupTab:
+      }, {
         title:            'Groups'
+        route:            'projects#show.groups'
         icon:             'fa-group'
         seq:              3
-      learningOutcomeTab:
+      }, {
         title:            'Learning Outcomes'
+        route:            'projects#show.learning_outcome'
         icon:             'fa-graduation-cap'
         seq:              4
-      portfolioTab:
+      }, {
         title:            'Portfolio'
+        route:            'projects#show.portfolio'
         icon:             'fa-book'
         seq:              5
+      }
+    ]
 
     # Set the active tab
     $scope.setActiveTab = (tab) ->

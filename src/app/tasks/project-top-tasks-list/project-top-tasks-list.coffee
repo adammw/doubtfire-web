@@ -11,7 +11,7 @@ angular.module('doubtfire.tasks.project-top-tasks-list', [])
   scope:
     project: "=project"
     onSelect: "="
-  controller: ($scope, taskService, gradeService) ->
+  controller: ($scope, $state, taskService, gradeService) ->
     $scope.statusText = taskService.statusText
     $scope.statusData = taskService.statusData
     $scope.statusClass = taskService.statusClass

@@ -30,11 +30,19 @@ angular.module('doubtfire.config.runtime', [])
   handleUnauthorised = ->
     handleUnauthorisedDest($state.current, $state.params)
 
-  # Don't let the user see pages not intended for their role
   $rootScope.$on "$stateChangeStart", (evt, toState, toParams) ->
+    # Don't let the user see pages not intended for their role
     unless auth.isAuthorised toState.data.roleWhitelist
       evt.preventDefault()
       handleUnauthorisedDest(toState, toParams)
+
+    # Handle redirected states
+    if toState.redirectTo
+      evt.preventDefault()
+      if angular.isFunction(toState.redirectTo)
+        toState.redirectTo.call($state)
+      else
+        $state.go(toState.redirectTo, toParams, { location: 'replace', relative: toState })
 
   # Redirect the user if they make an unauthorised API request
   $rootScope.$on "unauthorisedRequestIntercepted", handleUnauthorised

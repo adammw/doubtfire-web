@@ -101,6 +101,7 @@ module.exports = {
         'vendor/angular-resource/angular-resource.js',
         'vendor/angular-bootstrap/ui-bootstrap-tpls.js',
         'vendor/angular-ui-router/release/angular-ui-router.js',
+        'vendor/angular-ui-router-tabs/src/ui-router-tabs.js',
         'vendor/d3/d3.js',
         'vendor/angular-charts/dist/angular-charts.js',
         'vendor/flashular/bin/flashular.js',

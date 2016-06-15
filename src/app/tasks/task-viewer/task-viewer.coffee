@@ -15,41 +15,42 @@ angular.module('doubtfire.tasks.task-viewer', [])
     unit: '='
     project: '='
     assessingUnitRole: '='
-  controller: ($scope, $state, $stateParams, TaskFeedback, Task, Project, taskService, groupService, alertService, projectService, analyticsService) ->
+  controller: ($scope, $rootScope, $state, $stateParams, TaskFeedback, Task, Project, taskService, groupService, alertService, projectService, analyticsService) ->
     #
     # Active task tab group
     #
-    $scope.tabs =
-      taskSheet:
+    $scope.tabs = [
+      {
         title: "Task Description"
         subtitle: "A brief description of this task"
+        route: 'projects#show.tasks#show.taskSheet'
         icon: "fa-info"
-        seq: 0
-        active: false
-      fileUpload:
+      }, {
         title: "Upload Submission"
         subtitle: "Upload your submission so it is ready for your tutor to mark"
+        route: 'projects#show.tasks#show.taskSubmission'
         icon: "fa-upload"
-        seq: 1
-        active: false
-      viewSubmission:
+      }, {
         title: "View Submission"
         subtitle: "View the latest submission you have uploaded"
+        route: 'projects#show.tasks#show.viewSubmission'
         icon: "fa-file-o"
-        seq: 2
-        active: false
-      viewComments:
+      }, {
         title: "View Comments"
         subtitle: "Write and read comments between you and your tutor"
+        route: 'projects#show.tasks#show.comments'
         icon: "fa-comments-o"
-        seq: 3
-        active: false
-      plagiarismReport:
+      }, {
         title: "View Similarities Detected"
         subtitle: "See the other submissions and how closely they relate to your submission"
+        route: 'projects#show.tasks#show.plagiarismReport'
         icon: "fa-eye"
-        seq: 4
-        active: false
+      }
+    ]
+
+    $scope.currentState = $state.current
+    $rootScope.$on '$stateChangeSuccess', () ->
+      $scope.currentState = $state.current
 
     #
     # Sets the active tab
@@ -69,6 +70,12 @@ angular.module('doubtfire.tasks.task-viewer', [])
     $scope.isActiveTab = (tab) ->
       tab is $scope.activeTab
 
+    $scope.task = _.find($scope.project.tasks, { task_definition_id: parseInt($stateParams.taskDefId) })
+
+    unless $scope.task
+      defaultTask = _.first _.sortBy($scope.project.tasks, 'seq')
+      $state.go('projects#show.tasks#show', _.assign({}, $stateParams, { taskDefId: defaultTask.task_definition_id }), { location: 'replace' })
+
     $scope.$watch 'project.selectedTask', (newTask) ->
       unless newTask?
         newTask = _.first $scope.project.tasks
@@ -77,11 +84,11 @@ angular.module('doubtfire.tasks.task-viewer', [])
         $scope.setActiveTab($scope.tabs.viewSubmission)
       else if $stateParams.viewing == 'submit'
         $scope.setActiveTab($scope.tabs.fileUpload)
-      else if $scope.project.selectedTask?
-        if $scope.project.selectedTask.similar_to_count > 0
+      else if $scope.task?
+        if $scope.task.similar_to_count > 0
           $scope.setActiveTab($scope.tabs.plagiarismReport)
         else
-          switch $scope.project.selectedTask.status
+          switch $scope.task.status
             when 'not_started'
               $scope.setActiveTab($scope.tabs.taskSheet)
             when 'ready_to_mark', 'complete', 'discuss', 'demonstrate'
@@ -98,16 +105,16 @@ angular.module('doubtfire.tasks.task-viewer', [])
     #
     # Watch grade for changes
     #
-    $scope.$watch 'project.selectedTask.grade', ->
-      $scope.taskIsGraded = taskService.taskIsGraded $scope.project.selectedTask
+    $scope.$watch 'task.grade', ->
+      $scope.taskIsGraded = taskService.taskIsGraded $scope.task
 
     #
-    # Loading the active task
+    # Switch the active task
     #
     $scope.setSelectedTask = (task) ->
+      return if task == $scope.task
       analyticsService.event 'Student Project View', "Switched to Task", 'Task Feedback Page Dropdown'
-      return if task == $scope.project.selectedTask
-      $scope.project.selectedTask = task
+      $state.go('projects#show.tasks#show', { taskDefId: task.task_definition_id })
 
     #
     # Functions from taskService to get data
@@ -120,7 +127,7 @@ angular.module('doubtfire.tasks.task-viewer', [])
       taskService.daysOverdue(task)
 
     $scope.activeStatusData = ->
-      $scope.statusData($scope.project.selectedTask)
+      $scope.statusData($scope.task)
 
     $scope.groupSetName = (id) ->
       groupService.groupSetName(id, $scope.unit)
@@ -128,7 +135,7 @@ angular.module('doubtfire.tasks.task-viewer', [])
     $scope.hideGroupSetName = $scope.unit.group_sets.length is 0
 
     $scope.recreatePDF = ->
-      taskService.recreatePDF($scope.project.selectedTask, null)
+      taskService.recreatePDF($scope.task, null)
 
     #
     # Statuses tutors/students may change task to
@@ -143,18 +150,18 @@ angular.module('doubtfire.tasks.task-viewer', [])
       }
 
     $scope.activeClass = (status) ->
-      if status == $scope.project.selectedTask.status
+      if status == $scope.task.status
         "active"
       else
         ""
 
     $scope.triggerTransition = (status) ->
-      if (status == 'ready_to_mark' || status == 'need_help') and $scope.project.selectedTask.definition.upload_requirements.length > 0
+      if (status == 'ready_to_mark' || status == 'need_help') and $scope.task.definition.upload_requirements.length > 0
         $scope.setActiveTab($scope.tabs.fileUpload)
-        $scope.project.selectedTask.status = status
+        $scope.task.status = status
         return # handle with the uploader...
       else
-        taskService.updateTaskStatus($scope.unit, $scope.project, $scope.project.selectedTask, status)
+        taskService.updateTaskStatus($scope.unit, $scope.project, $scope.task, status)
         asUser = if $scope.assessingUnitRole? then $scope.assessingUnitRole.role else 'Student'
         analyticsService.event 'Student Project View - Tasks Tab', "Updated Status as #{asUser}", taskService.statusLabels[status]
 )

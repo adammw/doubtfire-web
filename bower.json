@@ -32,7 +32,8 @@
     "angular-nvd3": "~1.0.3",
     "angulartics": "~1.0.3",
     "angulartics-google-analytics": "~0.1.4",
-    "bootstrap-sass": "~3.3.6"
+    "bootstrap-sass": "~3.3.6",
+    "angular-ui-router-tabs": "^2.0.2"
   },
   "resolutions": {
     "d3": "3.4.11",
