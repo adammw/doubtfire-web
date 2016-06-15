@@ -1,12 +1,13 @@
 <div class="task-viewer">
   <div class="col-sm-12">
     <div class="task-viewer-toolbar clearfix">
-      <div class="btn-group dropdown active-task-selector col-sm-1" dropdown>
-        <button class="btn task-status {{activeStatusData().class}} dropdown-toggle" dropdown-toggle>
+      <div class="btn-group dropdown active-task-selector col-sm-1" uib-dropdown>
+        <button class="btn task-status {{activeStatusData().class}} dropdown-toggle" uib-dropdown-toggle>
           <label>{{project.selectedTask.definition.abbreviation}}</label>
           <span class="caret"></span>
         </button><!--/dropdown-button-->
         <project-tasks-list
+          uib-dropdown-menu
           class="dropdown-menu"
           in-menu="true"
           unit="unit"
@@ -40,13 +41,14 @@
         </div>
       </div><!--/task-header-info-->
 
-      <div tooltip-placement="left" tooltip="{{activeStatusData().label}}" tooltip-append-to-body="true" class="btn-group dropdown active-task-status-selector col-sm-1 pull-right" dropdown>
-        <button type="button" class="btn task-status {{statusClass(project.selectedTask.status)}} dropdown-toggle" dropdown-toggle>
+      <div tooltip-placement="left" tooltip="{{activeStatusData().label}}" tooltip-append-to-body="true" class="btn-group dropdown active-task-status-selector col-sm-1 pull-right" uib-dropdown>
+        <button type="button" class="btn task-status {{statusClass(project.selectedTask.status)}} dropdown-toggle" uib-dropdown-toggle>
           <i class="{{activeStatusData().icon}} fa-2x"></i>
           <span class="caret"></span>
         </button>
 
         <task-status-selector
+          uib-dropdown-menu
           task="project.selectedTask"
           assessing-unit-role="assessingUnitRole"
           in-menu="true"

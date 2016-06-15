@@ -101,11 +101,11 @@
           <!--/flags-data-->
           <td>
             <span tooltip-html-unsafe="<strong>{{student.tutorial.meeting_day}} {{student.tutorial.meeting_time | date: 'shortTime'}}</strong><br/> {{student.tutorial.meeting_location}} - {{student.tutorial.tutor_name}}">
-              <div class="btn-group dropdown" dropdown is-open="status.isopen">
-                <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+              <div class="btn-group dropdown" uib-dropdown is-open="status.isopen">
+                <button type="button" class="btn btn-default dropdown-toggle" uib-dropdown-toggle>
                   {{student.tutorial ? student.tutorial.abbreviation : 'None'}} <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu" uib-dropdown-menu>
                   <li><a ng-click="switchToLab(student, nil); status.isopen = false">None</a></li>
                   <li ng-repeat="tutorial in unit.tutorials | orderBy:'abbreviation'"><a ng-click="switchToLab(student, tutorial); status.isopen = false" ng-hide="tutorial == student.tutorial">{{tutorial.abbreviation}}</a></li>
                 </ul>

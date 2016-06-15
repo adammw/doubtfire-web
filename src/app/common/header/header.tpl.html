@@ -15,9 +15,9 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'" ng-show="!navCollapsed">
     <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown dropdown-admin" dropdown ng-repeat="menu in menus | orderBy:'name'">
-        <a class="dropdown-toggle" dropdown-toggle role="button"><span class="glyphicon glyphicon-{{menu.icon}}">{{menu.name}}</span><b class="caret"></b></a>
-        <ul class="dropdown-menu">
+      <li class="dropdown dropdown-admin" uib-dropdown ng-repeat="menu in menus | orderBy:'name'">
+        <a class="dropdown-toggle" uib-dropdown-toggle role="button"><span class="glyphicon glyphicon-{{menu.icon}}">{{menu.name}}</span><b class="caret"></b></a>
+        <ul class="dropdown-menu" uib-dropdown-menu>
           <li ng-repeat="link in menu.links | orderBy:'name'"
               ng-class="{active: link.class === 'active'}">
             <a href="{{link.url}}">{{link.name}}</a>
@@ -25,9 +25,9 @@
         </ul>
       </li>
 
-      <li class="dropdown dropdown-units" dropdown ng-hide="projects.length == 0 && unitRoles.length == 0">
-        <a role="button" class="dropdown-toggle" dropdown-toggle><span class="glyphicon glyphicon-book"></span> Units <b class="caret"></b></a>
-        <ul class="dropdown-menu">
+      <li class="dropdown dropdown-units" uib-dropdown ng-hide="projects.length == 0 && unitRoles.length == 0">
+        <a role="button" class="dropdown-toggle" uib-dropdown-toggle><span class="glyphicon glyphicon-book"></span> Units <b class="caret"></b></a>
+        <ul class="dropdown-menu" uib-dropdown-menu>
           <li ng-hide="unitRoles.length == 0" class="dropdown-header">Units You Teach</li>
           <li ng-repeat="unitRole in unitRoles | filter:isUniqueUnitRole">
             <a href="#/units?unitRole={{unitRole.id}}">
@@ -53,25 +53,25 @@
         </ul>
       </li>
 
-      <li class="dropdown" dropdown if-role="Admin">
-        <a class="dropdown-toggle" dropdown-toggle><span class="glyphicon glyphicon-wrench"></span> Administration<b class="caret"></b></a>
-        <ul class="dropdown-menu">
+      <li class="dropdown" uib-dropdown if-role="Admin">
+        <a class="dropdown-toggle" uib-dropdown-toggle><span class="glyphicon glyphicon-wrench"></span> Administration<b class="caret"></b></a>
+        <ul class="dropdown-menu" uib-dropdown-menu>
           <li><a href="#/admin/units">Manage Units</a></li>
           <li><a href="#/admin/users">Manage Users</a></li>
         </ul>
       </li>
 
-      <li class="dropdown" dropdown if-role="Convenor">
-        <a class="dropdown-toggle" dropdown-toggle><span class="glyphicon glyphicon-wrench"></span> Administration<b class="caret"></b></a>
-        <ul class="dropdown-menu">
+      <li class="dropdown" uib-dropdown if-role="Convenor">
+        <a class="dropdown-toggle" uib-dropdown-toggle><span class="glyphicon glyphicon-wrench"></span> Administration<b class="caret"></b></a>
+        <ul class="dropdown-menu" uib-dropdown-menu>
           <li><a href="#/admin/units">Manage Units</a></li>
           <li><a href="#/admin/users">Manage Users</a></li>
         </ul>
       </li>
 
-      <li class="dropdown" dropdown>
-        <a class="dropdown-toggle" dropdown-toggle><span class="glyphicon glyphicon-user"></span> {{currentUser.name}} {{currentUser.nickname ? '(' + currentUser.nickname + ')' : ''}}<b class="caret"></b></a>
-        <ul class="dropdown-menu">
+      <li class="dropdown" uib-dropdown>
+        <a class="dropdown-toggle" uib-dropdown-toggle><span class="glyphicon glyphicon-user"></span> {{currentUser.name}} {{currentUser.nickname ? '(' + currentUser.nickname + ')' : ''}}<b class="caret"></b></a>
+        <ul class="dropdown-menu" uib-dropdown-menu>
           <li><a ng-click="openUserSettings()">Profile</a></li>
           <li><a ng-click="openNotificationSettings()">Notifications</a></li>
           <li class="divider"></li>
